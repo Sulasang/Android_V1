@@ -36,6 +36,8 @@ android {
 }
 
 dependencies {
+
+    implementation(project(":domain"))
     // AndroidX
     implementation(AndroidX.APP_COMPAT)
     implementation(AndroidX.CORE_KTX)
