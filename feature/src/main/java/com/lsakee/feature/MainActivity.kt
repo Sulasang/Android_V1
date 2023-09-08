@@ -29,19 +29,36 @@ class MainActivity : BindingActivity<ActivityMainBinding>(R.layout.activity_main
         super.onCreate(savedInstanceState)
         setCurrentDate()
         collectTagListData()
+        initAdapter()
+
+        binding.chip1.setOnClickListener {
+            handleChipClick("Little Kitchen")
+        }
+        binding.chip2.setOnClickListener {
+            handleChipClick("Mom's Cook")
+        }
+        binding.chip3.setOnClickListener {
+            handleChipClick("Chef Table")
+        }
+    }
+
+    private fun initAdapter() {
         menuAdapter = MenuAdapter()
         binding.rvAllMenuList.adapter = menuAdapter
         timeMenuAdapter = MenuAdapter()
         binding.rvTimeMenuList.adapter = timeMenuAdapter
-
-        
     }
-
+    private fun handleChipClick(companyName: String) {
+        menuAdapter.submitList(companyMap[companyName]?.first)
+        timeMenuAdapter.submitList(companyMap[companyName]?.second)
+    }
     private fun collectTagListData() {
 
         viewModel.diet.flowWithLifecycle(lifecycle).onEach {
+
             when (it) {
                 is UiState.Success -> {
+                    companyMap.clear()
                     dateAndTypeDietInfo = it.data.dateAndTypeDietInfo
                     for (dietInfo in it.data.dateAndTypeDietInfo) {
                         val company = dietInfo.company
@@ -74,18 +91,40 @@ class MainActivity : BindingActivity<ActivityMainBinding>(R.layout.activity_main
 
 
     private fun setCurrentDate() {
+
         val currentTime = Calendar.getInstance()
-        val dateFormat = SimpleDateFormat("MM.dd (E)", Locale.KOREA)
-        val formattedDate = dateFormat.format(currentTime.time)
 
         // 현재 날짜에서 3일을 뺍니다. Test
-        currentTime.add(Calendar.DAY_OF_MONTH, -3)
+        currentTime.add(Calendar.DAY_OF_MONTH, -2)
+
+        val dateFormat = SimpleDateFormat("MM.dd (E)", Locale.KOREA)
+        val formattedDate = dateFormat.format(currentTime.time)
 
 
         val dateFormat2 = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.KOREA)
         val formattedDate2 = dateFormat2.format(currentTime.time)
         viewModel.getDiet(formattedDate2, "LUNCH")
         binding.tvMenuDate.text = formattedDate
+
+        binding.ivRightBtn.setOnClickListener {
+            currentTime.add(Calendar.DAY_OF_MONTH, +1)
+            val dateFormat = SimpleDateFormat("MM.dd (E)", Locale.KOREA)
+            val formattedDate = dateFormat.format(currentTime.time)
+            val dateFormat2 = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.KOREA)
+            val formattedDate2 = dateFormat2.format(currentTime.time)
+            binding.tvMenuDate.text = formattedDate
+            viewModel.getDiet(formattedDate2, "LUNCH")
+        }
+
+        binding.ivLeftBtn.setOnClickListener {
+            currentTime.add(Calendar.DAY_OF_MONTH, -1)
+            val dateFormat = SimpleDateFormat("MM.dd (E)", Locale.KOREA)
+            val formattedDate = dateFormat.format(currentTime.time)
+            val dateFormat2 = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.KOREA)
+            val formattedDate2 = dateFormat2.format(currentTime.time)
+            binding.tvMenuDate.text = formattedDate
+            viewModel.getDiet(formattedDate2, "LUNCH")
+        }
     }
 
 
