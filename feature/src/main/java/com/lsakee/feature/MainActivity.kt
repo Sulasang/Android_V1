@@ -1,4 +1,4 @@
-package com.lsakee.suwon_sulasang
+package com.lsakee.feature
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
