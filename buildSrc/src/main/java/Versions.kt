@@ -4,7 +4,7 @@ object Versions {
     const val JVM_VERSION = "1.8"
     val JAVA_VERSION = JavaVersion.VERSION_1_8
 
-    const val GRADLE = "7.4.2"
+    const val GRADLE = "8.1.1"
     const val KOTLIN_VERSION = "1.7.20"
     const val KOTLIN_SERIALIZATION_VERSION = "1.4.1"
 

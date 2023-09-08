@@ -1,6 +1,9 @@
 plugins {
     id("com.android.application")
-    id("org.jetbrains.kotlin.android")
+    kotlin("android")
+    kotlin("kapt")
+    kotlin("plugin.serialization") version Versions.KOTLIN_VERSION
+    id("dagger.hilt.android.plugin")
 }
 
 android {
@@ -38,12 +41,42 @@ android {
 dependencies {
 
     implementation(project(":feature"))
+    implementation(project(":core-ui"))
+    implementation(project(":domain"))
+    implementation(project(":data"))
+    implementation(project(":data-remote"))
+    // Kotlin
+    implementation(KotlinX.KOTLINX_SERIALIZATION)
+    // AndroidX
+    implementation(AndroidX.ACTIVITY)
+    implementation(AndroidX.APP_COMPAT)
+    implementation(AndroidX.CORE_KTX)
+    implementation(AndroidX.LIFECYCLE_RUNTIME)
+    implementation(AndroidX.PAGING)
+    implementation(AndroidX.LIFECYCLE_VIEWMODEL_KTX)
+    implementation(AndroidX.NAVIGATION_CONPONENT_FRAGMENT)
+    implementation(AndroidX.NAVIGATION_CONPONENT_UI)
+    implementation(AndroidX.CONSTRAINT_LAYOUT)
 
-    implementation("androidx.core:core-ktx:1.9.0")
-    implementation("androidx.appcompat:appcompat:1.6.1")
-    implementation("com.google.android.material:material:1.9.0")
-    implementation("androidx.constraintlayout:constraintlayout:2.1.4")
-    testImplementation("junit:junit:4.13.2")
-    androidTestImplementation("androidx.test.ext:junit:1.1.5")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
+    // Matrial Design
+    implementation(Google.MATERIAL)
+
+    // Test Dependency
+    androidTestImplementation(TestDependencies.EXT_JUNIT)
+    androidTestImplementation(TestDependencies.ESPRESSO_CORE)
+    testImplementation(TestDependencies.JUNIT)
+
+    //Hilt
+    implementation(Google.HILT_ANDROID)
+    kapt(Google.HILT_ANDROID_COMPILER)
+
+    // Third-Party
+    implementation(SquareUp.RETROFIT2)
+    implementation(SquareUp.RETROFIT2_CONVERTER_GSON)
+    implementation(SquareUp.OKHTTP3)
+    implementation(SquareUp.OKHTTP3_LOGGING)
+    implementation(SquareUp.OKHTTP3_BOM)
+    implementation(Jakewharton.TIMBER)
+    implementation(Jakewharton.CONVERTER)
+    implementation(ThirdParty.COIL)
 }
