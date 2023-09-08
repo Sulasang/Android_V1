@@ -17,3 +17,4 @@ rootProject.name = "Suwon_Sulasang"
 include(":app")
 include(":feature")
 include(":core-ui")
+include(":data")
