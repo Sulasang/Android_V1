@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="CustomChipChoice" parent="@style/Widget.Material3.Chip.Filter">
+
+        <item name="chipBackgroundColor">@color/chip_bg_state_list</item>
+        <item name="android:textColor">@color/chip_text_state_list</item>
+    </style>
+
+</resources>
