@@ -1,11 +1,8 @@
 package com.lsakee.data.remote
 
 import com.lsakee.data.BaseResponse
-import com.lsakee.data.model.MenuEntity
+import com.lsakee.data.model.DietDto
 
 interface MenuDataSource {
-    suspend fun getStudentMenu(): BaseResponse<MenuEntity>
-    suspend fun getStaffMenu(): BaseResponse<MenuEntity>
-
-
+    suspend fun getDiet(date: String, type: String): BaseResponse<DietDto>
 }
