@@ -7,7 +7,6 @@ import androidx.lifecycle.lifecycleScope
 import com.lsakee.core_ui.base.BindingActivity
 import com.lsakee.core_ui.view.UiState
 import com.lsakee.domain.model.DateAndTypeDietInfo
-import com.lsakee.domain.model.Diet
 import com.lsakee.feature.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.launchIn
@@ -15,20 +14,27 @@ import kotlinx.coroutines.flow.onEach
 import timber.log.Timber
 import java.text.SimpleDateFormat
 import java.util.Calendar
-import java.util.Date
 import java.util.Locale
 
 @AndroidEntryPoint
 class MainActivity : BindingActivity<ActivityMainBinding>(R.layout.activity_main) {
+
+    private lateinit var menuAdapter: MenuAdapter
+    private lateinit var timeMenuAdapter: MenuAdapter
     private val viewModel by viewModels<MenuViewModel>()
     private lateinit var dateAndTypeDietInfo: List<DateAndTypeDietInfo>
-    val companyMap = mutableMapOf<String, Pair<List<String>,List<String>>>()
+    val companyMap = mutableMapOf<String, Pair<List<String>, List<String>>>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setCurrentDate()
         collectTagListData()
+        menuAdapter = MenuAdapter()
+        binding.rvAllMenuList.adapter = menuAdapter
+        timeMenuAdapter = MenuAdapter()
+        binding.rvTimeMenuList.adapter = timeMenuAdapter
 
+        
     }
 
     private fun collectTagListData() {
@@ -37,26 +43,28 @@ class MainActivity : BindingActivity<ActivityMainBinding>(R.layout.activity_main
             when (it) {
                 is UiState.Success -> {
                     dateAndTypeDietInfo = it.data.dateAndTypeDietInfo
-
                     for (dietInfo in it.data.dateAndTypeDietInfo) {
                         val company = dietInfo.company
                         if (company.isNotEmpty()) {
                             if (companyMap.containsKey(company)) {
-                                val companyCommonMenu = companyMap[company]!!.first.toMutableList()
-                                val companyMainMenu = companyMap[company]!!.second.toMutableList()
-                                companyCommonMenu.addAll(dietInfo.commonMenu)
-                                companyMainMenu.addAll(dietInfo.mainMenu)
-                                companyMap[company] = Pair(companyCommonMenu.toList(), companyMainMenu.toList())
+                                val companyCommonMenu = companyMap[company]?.first?.toMutableList()
+                                val companyMainMenu = companyMap[company]?.second?.toMutableList()
+                                companyCommonMenu?.addAll(dietInfo.commonMenu)
+                                companyMainMenu?.addAll(dietInfo.mainMenu)
+                                companyMap[company] = Pair(
+                                    companyCommonMenu?.toList() ?: emptyList(),
+                                    companyMainMenu?.toList() ?: emptyList()
+                                )
                             } else {
                                 val companyCommonMenu = dietInfo.commonMenu.toMutableList()
                                 val companyMainMenu = dietInfo.mainMenu.toMutableList()
-                                companyMap[company] = Pair(companyCommonMenu.toList(), companyMainMenu.toList())
+                                companyMap[company] =
+                                    Pair(companyCommonMenu.toList(), companyMainMenu.toList())
                             }
                         }
                     }
-                    Timber.tag("testSak").d("${companyMap["Little Kitchen"]?.first}")
-                    binding.tvAllMenu.text = companyMap["Little Kitchen"]?.first.toString().replace(", ", "\n").replace("[", "").replace("]", "")?.trim()
-                    binding.tvMiddleMenu.text=companyMap["Little Kitchen"]?.second.toString().replace(", ", "\n").replace("[", "").replace("]", "")?.trim()
+                    menuAdapter.submitList(companyMap["Little Kitchen"]?.first)
+                    timeMenuAdapter.submitList(companyMap["Little Kitchen"]?.second)
                 }
 
                 else -> {}
