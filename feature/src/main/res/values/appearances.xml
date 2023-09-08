@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="TextAppearance.Sulasang" parent="">
+        <item name="android:textStyle">normal</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:includeFontPadding">false</item>
+    </style>
+
+    <style name="TextAppearance.Sulasang.Title">
+        <item name="fontFamily">@font/font_pretendard_bold</item>
+        <item name="android:textSize">26sp</item>
+        <item name="lineHeight">38dp</item>
+    </style>
+
+    <style name="TextAppearance.Sulasang.Headline">
+        <item name="fontFamily">@font/font_pretendard_bold</item>
+        <item name="android:textSize">20sp</item>
+        <item name="lineHeight">26dp</item>
+    </style>
+
+    <style name="TextAppearance.Sulasang.Subhead">
+        <item name="fontFamily">@font/font_pretendard_bold</item>
+        <item name="android:textSize">18sp</item>
+        <item name="lineHeight">28dp</item>
+    </style>
+
+    <style name="TextAppearance.Sulasang.Body_B">
+        <item name="fontFamily">@font/font_pretendard_bold</item>
+        <item name="android:textSize">16sp</item>
+        <item name="lineHeight">24dp</item>
+    </style>
+
+    <style name="TextAppearance.Sulasang.Body_M">
+        <item name="fontFamily">@font/font_pretendard_medium</item>
+        <item name="android:textSize">16sp</item>
+        <item name="lineHeight">24dp</item>
+    </style>
+
+    <style name="TextAppearance.Sulasang.Caption">
+        <item name="fontFamily">@font/font_pretendard_medium</item>
+        <item name="android:textSize">14sp</item>
+        <item name="lineHeight">16dp</item>
+    </style>
+
+</resources>

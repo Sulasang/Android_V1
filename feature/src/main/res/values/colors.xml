@@ -1,5 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="black">#FF000000</color>
+
+    <!-- USW Color-->
+    <color name="usw_yellow">#FAC914</color>
+    <color name="usw_white_yellow">#FDF5D7</color>\
+    <color name="usw_navy">#003670</color>
+    <!-- Gray Color-->
     <color name="white">#FFFFFFFF</color>
+    <color name="g_100">#F9F9F9</color>
+    <color name="g_200">#F0F0F0</color>
+    <color name="g_300">#D4D4D4</color>
+    <color name="g_400">#7F7F7F</color>
+    <color name="g_500">#636363</color>
+    <color name="g_700">#2B2B2B</color>
+
 </resources>
