@@ -1,11 +1,23 @@
 package com.lsakee.feature
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.activity.viewModels
+import com.lsakee.core_ui.base.BindingActivity
+import com.lsakee.feature.databinding.ActivityMainBinding
+import dagger.hilt.android.AndroidEntryPoint
 
-class MainActivity : AppCompatActivity() {
+@AndroidEntryPoint
+class MainActivity : BindingActivity<ActivityMainBinding>(R.layout.activity_main) {
+    private val viewModel by viewModels<MenuViewModel>()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+
+        binding.tvName.setOnClickListener {
+
+            viewModel.getTag()
+        }
+
     }
+
+
 }

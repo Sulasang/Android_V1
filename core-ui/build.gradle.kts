@@ -1,6 +1,8 @@
 plugins {
     id("com.android.library")
     kotlin("android")
+    kotlin("kapt")
+    id("dagger.hilt.android.plugin")
 }
 
 android {
@@ -44,6 +46,9 @@ dependencies {
     // Matrial Design
     implementation(Google.MATERIAL)
 
+    //Hilt
+    implementation(Google.HILT_ANDROID)
+    kapt(Google.HILT_ANDROID_COMPILER)
     // Test Dependency
     androidTestImplementation(TestDependencies.EXT_JUNIT)
     androidTestImplementation(TestDependencies.ESPRESSO_CORE)
