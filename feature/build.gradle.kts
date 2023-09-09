@@ -1,83 +1,22 @@
+
 plugins {
-    id("com.android.library")
-    kotlin("android")
-    kotlin("kapt")
-    id("dagger.hilt.android.plugin")
-    kotlin("plugin.serialization") version Versions.KOTLIN_VERSION
+    id("lsakee.plugin.feature")
+    id("org.jetbrains.kotlin.android")
+    id("org.jetbrains.kotlin.plugin.serialization")
 }
 
 android {
     namespace = "com.lsakee.feature"
-    compileSdk = 33
-
-    defaultConfig {
-        minSdk = 26
-
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-        consumerProguardFiles("consumer-rules.pro")
-    }
-
-    buildTypes {
-        release {
-            isMinifyEnabled = false
-            proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
-            )
-        }
-    }
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
-    }
-    kotlinOptions {
-        jvmTarget = "1.8"
-    }
-    buildFeatures {
-        dataBinding = true
-        viewBinding = true
-    }
+    dataBinding.enable = true
 }
 
 dependencies {
-    implementation(project(":core-ui"))
+
     implementation(project(":domain"))
-    // Kotlin
-    implementation(KotlinX.KOTLINX_SERIALIZATION)
-    // AndroidX
-    implementation(AndroidX.ACTIVITY)
-    implementation(AndroidX.APP_COMPAT)
-    implementation(AndroidX.CORE_KTX)
-    implementation(AndroidX.LIFECYCLE_RUNTIME)
-    implementation(AndroidX.PAGING)
-    implementation(AndroidX.LIFECYCLE_VIEWMODEL_KTX)
-    implementation(AndroidX.NAVIGATION_CONPONENT_FRAGMENT)
-    implementation(AndroidX.NAVIGATION_CONPONENT_UI)
-    implementation(AndroidX.CONSTRAINT_LAYOUT)
+    implementation(libs.kotlinx.serialization.json)
+    implementation(project(mapOf("path" to ":core-ui")))
 
-    // Matrial Design
-    implementation(Google.MATERIAL)
-
-    // Test Dependency
-    androidTestImplementation(TestDependencies.EXT_JUNIT)
-    androidTestImplementation(TestDependencies.ESPRESSO_CORE)
-    testImplementation(TestDependencies.JUNIT)
-
-    //Hilt
-    implementation(Google.HILT_ANDROID)
-    kapt(Google.HILT_ANDROID_COMPILER)
-
-    // Third-Party
-    implementation(SquareUp.RETROFIT2)
-    implementation(SquareUp.RETROFIT2_CONVERTER_GSON)
-    implementation(SquareUp.OKHTTP3)
-    implementation(SquareUp.OKHTTP3_LOGGING)
-    implementation(SquareUp.OKHTTP3_BOM)
-    implementation(Jakewharton.TIMBER)
-    implementation(Jakewharton.CONVERTER)
-    implementation(ThirdParty.COIL)
-
-    //google play
-    implementation(Google.GOOGLE_PLAY)
-
+    testImplementation(libs.junit4)
+    androidTestImplementation(libs.junit)
+    androidTestImplementation(libs.espresso.core)
 }

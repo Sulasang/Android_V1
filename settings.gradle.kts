@@ -1,4 +1,5 @@
 pluginManagement {
+    includeBuild("build-logic")
     repositories {
         google()
         mavenCentral()
@@ -20,3 +21,4 @@ include(":core-ui")
 include(":data")
 include(":domain")
 include(":data-remote")
+include(":di")

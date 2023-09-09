@@ -1,13 +1,8 @@
 plugins {
-    id("java-library")
-    id("org.jetbrains.kotlin.jvm")
-}
-
-java {
-    sourceCompatibility = JavaVersion.VERSION_1_8
-    targetCompatibility = JavaVersion.VERSION_1_8
+    id("lsakee.plugin.java.library")
 }
 
 dependencies {
-    implementation(KotlinX.KOTLINX_COROUTINE)
+    implementation(libs.kotlinx.coroutines.core)
+    implementation(libs.hilt.core)
 }
