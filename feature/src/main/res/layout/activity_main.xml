@@ -184,13 +184,28 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
                     android:layout_marginTop="8dp"
-                    android:drawableStart="@drawable/ic_pin"
+                    android:drawableStart="@drawable/ic_bullhorn"
                     android:drawablePadding="10dp"
                     android:text="중식"
                     android:textAppearance="@style/TextAppearance.Sulasang.Subhead"
                     android:textColor="@color/usw_navy"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tv_menu_middle_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="6dp"
+                    android:paddingHorizontal="10dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/shape_white_yellow_fill_12_rect"
+                    android:text="11:30 ~ 14:00"
+                    android:textAppearance="@style/TextAppearance.Sulasang.Caption"
+                    android:textColor="@color/g_500"
+                    app:layout_constraintStart_toEndOf="@id/tv_menu_middle"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="@id/tv_menu_middle"/>
 
                 <View
                     android:id="@+id/line2"
@@ -221,9 +236,9 @@
                 android:id="@+id/tv_develop"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingHorizontal="12dp"
-                android:layout_marginTop="40dp"
+                android:layout_marginTop="20dp"
                 android:layout_marginBottom="8dp"
+                android:paddingHorizontal="12dp"
                 android:text="Developed by"
                 android:textAppearance="@style/TextAppearance.Sulasang.Caption"
                 android:textColor="@color/g_700"
@@ -236,6 +251,7 @@
                 android:id="@+id/iv_sopt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
                 android:src="@drawable/ic_sopt"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="@id/tv_develop"
@@ -245,9 +261,10 @@
                 android:id="@+id/imageView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
                 android:src="@drawable/ic_mash_up"
-                app:layout_constraintEnd_toEndOf="@id/tv_develop"
                 app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@id/tv_develop"
                 app:layout_constraintTop_toBottomOf="@id/tv_develop" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>

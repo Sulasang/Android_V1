@@ -31,15 +31,22 @@ class MainActivity : BindingActivity<ActivityMainBinding>(R.layout.activity_main
         collectTagListData()
         initAdapter()
 
-        binding.chip1.setOnClickListener {
-            handleChipClick("Little Kitchen")
+        binding.chipGroup.setOnCheckedChangeListener { group, checkedId ->
+            when (checkedId) {
+                R.id.chip_1 -> handleChipClick("Little Kitchen")
+                R.id.chip_2 -> handleChipClick("Mom's Cook")
+                R.id.chip_3 -> handleChipClick("Chef Table")
+            }
         }
-        binding.chip2.setOnClickListener {
-            handleChipClick("Mom's Cook")
-        }
-        binding.chip3.setOnClickListener {
-            handleChipClick("Chef Table")
-        }
+//        binding.chip1.setOnClickListener {
+//            handleChipClick("Little Kitchen")
+//        }
+//        binding.chip2.setOnClickListener {
+//            handleChipClick("Mom's Cook")
+//        }
+//        binding.chip3.setOnClickListener {
+//            handleChipClick("Chef Table")
+//        }
     }
 
     private fun initAdapter() {
@@ -48,10 +55,12 @@ class MainActivity : BindingActivity<ActivityMainBinding>(R.layout.activity_main
         timeMenuAdapter = MenuAdapter()
         binding.rvTimeMenuList.adapter = timeMenuAdapter
     }
+
     private fun handleChipClick(companyName: String) {
         menuAdapter.submitList(companyMap[companyName]?.first)
         timeMenuAdapter.submitList(companyMap[companyName]?.second)
     }
+
     private fun collectTagListData() {
 
         viewModel.diet.flowWithLifecycle(lifecycle).onEach {
@@ -82,6 +91,7 @@ class MainActivity : BindingActivity<ActivityMainBinding>(R.layout.activity_main
                     }
                     menuAdapter.submitList(companyMap["Little Kitchen"]?.first)
                     timeMenuAdapter.submitList(companyMap["Little Kitchen"]?.second)
+                    binding.chip1.isChecked=true
                 }
 
                 else -> {}
