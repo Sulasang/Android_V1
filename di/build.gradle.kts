@@ -1,37 +1,12 @@
 plugins {
-    id("com.android.library")
-    kotlin("android")
-    kotlin("kapt")
-    kotlin("plugin.serialization") version Versions.KOTLIN_VERSION
-    id("dagger.hilt.android.plugin")
+    id("lsakee.plugin.android-library")
+    id("lsakee.plugin.hilt")
+    id("org.jetbrains.kotlin.plugin.serialization")
+    id("com.google.devtools.ksp")
 }
 
 android {
     namespace = "com.lsakee.di"
-    compileSdk = 33
-
-    defaultConfig {
-        minSdk = 26
-
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-    }
-
-    buildTypes {
-        release {
-            isMinifyEnabled = false
-            proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
-            )
-        }
-    }
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
-    }
-    kotlinOptions {
-        jvmTarget = "1.8"
-    }
 }
 
 dependencies {
@@ -39,17 +14,23 @@ dependencies {
     implementation(project(":domain"))
     implementation(project(":data"))
     implementation(project(":data-remote"))
-    //Hilt
-    implementation(Google.HILT_ANDROID)
-    kapt(Google.HILT_ANDROID_COMPILER)
-    // Kotlin
-    implementation(KotlinX.KOTLINX_SERIALIZATION)
 
-    implementation(SquareUp.RETROFIT2)
-    implementation(SquareUp.RETROFIT2_CONVERTER_GSON)
-    implementation(SquareUp.OKHTTP3)
-    implementation(SquareUp.OKHTTP3_LOGGING)
-    implementation(SquareUp.OKHTTP3_BOM)
-    implementation(Jakewharton.TIMBER)
-    implementation(Jakewharton.CONVERTER)
+    implementation(libs.bundles.coroutine)
+    implementation(libs.kotlinx.serialization.json)
+    implementation(libs.retrofit.core)
+    implementation(libs.retrofit.kotlin.serialization)
+    implementation(libs.okhttp.logging)
+
+    implementation(libs.androidx.dataStore.core)
+    implementation(libs.androidx.dataStore.preferences)
+
+    ksp(libs.encrypted.datastore.preference.ksp)
+    implementation(libs.encrypted.datastore.preference.ksp.annotations)
+    implementation(libs.encrypted.datastore.preference.security)
+
+    ksp(libs.room.compiler)
+    implementation(libs.room.runtime)
+    implementation(libs.room.ktx)
+
+    implementation(libs.timber)
 }

@@ -1,45 +1,23 @@
 plugins {
-    id("com.android.application")
-    kotlin("android")
-    kotlin("kapt")
-    kotlin("plugin.serialization") version Versions.KOTLIN_VERSION
-    id("dagger.hilt.android.plugin")
+    id("lsakee.plugin.application")
+    id("lsakee.plugin.hilt")
 }
 
 android {
     namespace = "com.lsakee.suwon_sulasang"
-    compileSdk = 33
 
     defaultConfig {
-        applicationId = "com.lsakee.suwon_sulasang"
+        applicationId = "com.lsakee.sulasang"
         minSdk = 26
         targetSdk = 33
-        versionCode = 2
+        versionCode =1
         versionName = "1.0"
-
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner ="androidx.test.runner.AndroidJUnitRunner"
     }
 
-    buildTypes {
-        release {
-            isMinifyEnabled = false
-            proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
-            )
-        }
-    }
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
-    }
-    kotlinOptions {
-        jvmTarget = "1.8"
-    }
-    buildFeatures {
-        dataBinding = true
-        viewBinding = true
-    }
+
+    viewBinding.enable = true
+    dataBinding.enable = true
 }
 
 dependencies {
@@ -51,18 +29,21 @@ dependencies {
     implementation(project(":data-remote"))
     implementation(project(":di"))
 
-    // Matrial Design
-    implementation(Google.MATERIAL)
+    implementation(libs.androidx.appcompat)
+    implementation(libs.androidx.core.ktx)
+    implementation(libs.androidx.constraintlayout)
+    implementation(libs.androidx.splashscreen)
+    implementation(libs.bundles.androidx.navigation)
 
-    // Test Dependency
-    androidTestImplementation(TestDependencies.EXT_JUNIT)
-    androidTestImplementation(TestDependencies.ESPRESSO_CORE)
-    testImplementation(TestDependencies.JUNIT)
+    implementation(libs.retrofit.core)
+    implementation(libs.retrofit.kotlin.serialization)
+    implementation(libs.okhttp.logging)
+    implementation(libs.bundles.coroutine)
+    implementation(libs.kotlinx.serialization.json)
 
-    //Hilt
-    implementation(Google.HILT_ANDROID)
-    kapt(Google.HILT_ANDROID_COMPILER)
+    implementation(libs.timber)
 
-    // Third-Party
-    implementation(Jakewharton.TIMBER)
+    testImplementation(libs.junit4)
+    androidTestImplementation(libs.junit)
+    androidTestImplementation(libs.espresso.core)
 }

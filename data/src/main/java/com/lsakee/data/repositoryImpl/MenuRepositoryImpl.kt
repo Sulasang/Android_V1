@@ -6,7 +6,6 @@ import com.lsakee.domain.model.Diet
 import com.lsakee.domain.repository.MenuRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
-import timber.log.Timber
 import javax.inject.Inject
 
 class MenuRepositoryImpl @Inject constructor(
@@ -18,7 +17,6 @@ class MenuRepositoryImpl @Inject constructor(
             val result = kotlin.runCatching {
                 dataSource.getDiet(date, type).result?.toDietDomain()
             }
-            Timber.tag("LeeSak").d("$result")
             result.getOrDefault(Diet(emptyList()))?.let { emit(it) }
         }
     }
