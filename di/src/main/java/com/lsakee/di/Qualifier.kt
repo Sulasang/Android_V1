@@ -1,4 +1,4 @@
-package com.lsakee.suwon_sulasang.di
+package com.lsakee.di
 
 import javax.inject.Qualifier
 

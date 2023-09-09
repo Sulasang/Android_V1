@@ -1,9 +1,9 @@
-package com.lsakee.suwon_sulasang.di
+package com.lsakee.di
 
 import android.util.Log
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
-import com.lsakee.suwon_sulasang.di.extension.isJsonArray
-import com.lsakee.suwon_sulasang.di.extension.isJsonObject
+import com.lsakee.di.extension.isJsonArray
+import com.lsakee.di.extension.isJsonObject
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -53,7 +53,7 @@ object RetrofitModule {
     @SulasangRetrofit
     fun provideVelogRetrofit(okHttpClient: OkHttpClient): Retrofit = Retrofit.Builder()
         .addConverterFactory(Json.asConverterFactory("application/json".toMediaType()))
-        .baseUrl("http://13.209.94.162:8080")
+            .baseUrl("http://13.209.94.162:8080")
         .client(okHttpClient)
         .build()
 

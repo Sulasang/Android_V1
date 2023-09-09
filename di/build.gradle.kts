@@ -1,5 +1,5 @@
 plugins {
-    id("com.android.application")
+    id("com.android.library")
     kotlin("android")
     kotlin("kapt")
     kotlin("plugin.serialization") version Versions.KOTLIN_VERSION
@@ -7,15 +7,11 @@ plugins {
 }
 
 android {
-    namespace = "com.lsakee.suwon_sulasang"
+    namespace = "com.lsakee.di"
     compileSdk = 33
 
     defaultConfig {
-        applicationId = "com.lsakee.suwon_sulasang"
         minSdk = 26
-        targetSdk = 33
-        versionCode = 2
-        versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -36,33 +32,24 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
-    buildFeatures {
-        dataBinding = true
-        viewBinding = true
-    }
 }
 
 dependencies {
 
-    implementation(project(":feature"))
-    implementation(project(":core-ui"))
     implementation(project(":domain"))
     implementation(project(":data"))
     implementation(project(":data-remote"))
-    implementation(project(":di"))
-
-    // Matrial Design
-    implementation(Google.MATERIAL)
-
-    // Test Dependency
-    androidTestImplementation(TestDependencies.EXT_JUNIT)
-    androidTestImplementation(TestDependencies.ESPRESSO_CORE)
-    testImplementation(TestDependencies.JUNIT)
-
     //Hilt
     implementation(Google.HILT_ANDROID)
     kapt(Google.HILT_ANDROID_COMPILER)
+    // Kotlin
+    implementation(KotlinX.KOTLINX_SERIALIZATION)
 
-    // Third-Party
+    implementation(SquareUp.RETROFIT2)
+    implementation(SquareUp.RETROFIT2_CONVERTER_GSON)
+    implementation(SquareUp.OKHTTP3)
+    implementation(SquareUp.OKHTTP3_LOGGING)
+    implementation(SquareUp.OKHTTP3_BOM)
     implementation(Jakewharton.TIMBER)
+    implementation(Jakewharton.CONVERTER)
 }

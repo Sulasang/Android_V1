@@ -1,4 +1,4 @@
-package com.lsakee.suwon_sulasang.di
+package com.lsakee.di
 
 import com.lsakee.domain.repository.MenuRepository
 import com.lsakee.domain.usecase.GetDietUseCase

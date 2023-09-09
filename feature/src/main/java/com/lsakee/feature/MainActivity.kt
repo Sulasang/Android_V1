@@ -23,8 +23,7 @@ class MainActivity : BindingActivity<ActivityMainBinding>(R.layout.activity_main
     private lateinit var timeMenuAdapter: MenuAdapter
     private val viewModel by viewModels<MenuViewModel>()
     private lateinit var dateAndTypeDietInfo: List<DateAndTypeDietInfo>
-    val companyMap = mutableMapOf<String, Pair<List<String>, List<String>>>()
-
+    private val companyMap = mutableMapOf<String, Pair<List<String>, List<String>>>()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setCurrentDate()
@@ -38,15 +37,6 @@ class MainActivity : BindingActivity<ActivityMainBinding>(R.layout.activity_main
                 R.id.chip_3 -> handleChipClick("Chef Table")
             }
         }
-//        binding.chip1.setOnClickListener {
-//            handleChipClick("Little Kitchen")
-//        }
-//        binding.chip2.setOnClickListener {
-//            handleChipClick("Mom's Cook")
-//        }
-//        binding.chip3.setOnClickListener {
-//            handleChipClick("Chef Table")
-//        }
     }
 
     private fun initAdapter() {
@@ -57,8 +47,8 @@ class MainActivity : BindingActivity<ActivityMainBinding>(R.layout.activity_main
     }
 
     private fun handleChipClick(companyName: String) {
-        menuAdapter.submitList(companyMap[companyName]?.first)
-        timeMenuAdapter.submitList(companyMap[companyName]?.second)
+        menuAdapter.submitList(companyMap[companyName]?.first?: listOf("오늘은 학식이 없습니다."))
+        timeMenuAdapter.submitList(companyMap[companyName]?.second?: listOf("오늘은 학식이 없습니다."))
     }
 
     private fun collectTagListData() {
@@ -89,9 +79,24 @@ class MainActivity : BindingActivity<ActivityMainBinding>(R.layout.activity_main
                             }
                         }
                     }
-                    menuAdapter.submitList(companyMap["Little Kitchen"]?.first)
-                    timeMenuAdapter.submitList(companyMap["Little Kitchen"]?.second)
-                    binding.chip1.isChecked=true
+                    if (binding.chip1.isChecked) {
+                        menuAdapter.submitList(companyMap["Little Kitchen"]?.first ?: listOf("오늘은 학식이 없습니다."))
+                        timeMenuAdapter.submitList(companyMap["Little Kitchen"]?.second ?: listOf("오늘은 학식이 없습니다."))
+
+                    }
+
+                    // 두 번째 칩 버튼이 선택되어 있을 때 실행할 이벤트
+                    if (binding.chip2.isChecked) {
+                        menuAdapter.submitList(companyMap["Mom's Cook"]?.first ?: listOf("오늘은 학식이 없습니다."))
+                        timeMenuAdapter.submitList(companyMap["Mom's Cook"]?.second ?: listOf("오늘은 학식이 없습니다."))
+
+                    }
+
+                    // 세 번째 칩 버튼이 선택되어 있을 때 실행할 이벤트
+                    if (binding.chip3.isChecked) {
+                        menuAdapter.submitList(companyMap["Chef Table"]?.first ?: listOf("오늘은 학식이 없습니다."))
+                        timeMenuAdapter.submitList(companyMap["Chef Table"]?.second ?: listOf("오늘은 학식이 없습니다."))
+                    }
                 }
 
                 else -> {}
@@ -104,9 +109,6 @@ class MainActivity : BindingActivity<ActivityMainBinding>(R.layout.activity_main
 
         val currentTime = Calendar.getInstance()
 
-        // 현재 날짜에서 3일을 뺍니다. Test
-        currentTime.add(Calendar.DAY_OF_MONTH, -2)
-
         val dateFormat = SimpleDateFormat("MM.dd (E)", Locale.KOREA)
         val formattedDate = dateFormat.format(currentTime.time)
 
@@ -116,14 +118,32 @@ class MainActivity : BindingActivity<ActivityMainBinding>(R.layout.activity_main
         viewModel.getDiet(formattedDate2, "LUNCH")
         binding.tvMenuDate.text = formattedDate
 
+        val sevenDaysAgo = Calendar.getInstance()
+        sevenDaysAgo.add(Calendar.DAY_OF_MONTH, -7)
+
+        val sevenDaysLater = Calendar.getInstance()
+        sevenDaysLater.add(Calendar.DAY_OF_MONTH, 7)
+
+        val formattedSevenDaysAgo = dateFormat.format(sevenDaysAgo.time)
+        val formattedSevenDaysLater = dateFormat.format(sevenDaysLater.time)
+
         binding.ivRightBtn.setOnClickListener {
             currentTime.add(Calendar.DAY_OF_MONTH, +1)
             val dateFormat = SimpleDateFormat("MM.dd (E)", Locale.KOREA)
             val formattedDate = dateFormat.format(currentTime.time)
             val dateFormat2 = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.KOREA)
             val formattedDate2 = dateFormat2.format(currentTime.time)
+            val comparisonResult = formattedDate.compareTo(formattedSevenDaysLater)
+            Timber.d("$formattedDate,$formattedSevenDaysLater")
+            if (comparisonResult > 0) {
+                Timber.d("currentDate는 otherDate보다 이후 날짜입니다.")
+                binding.ivRightBtn.isEnabled=false
+                binding.ivLeftBtn.isEnabled=true
+            }
             binding.tvMenuDate.text = formattedDate
             viewModel.getDiet(formattedDate2, "LUNCH")
+            binding.chip1.isChecked = true
+
         }
 
         binding.ivLeftBtn.setOnClickListener {
@@ -132,8 +152,16 @@ class MainActivity : BindingActivity<ActivityMainBinding>(R.layout.activity_main
             val formattedDate = dateFormat.format(currentTime.time)
             val dateFormat2 = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.KOREA)
             val formattedDate2 = dateFormat2.format(currentTime.time)
+            val comparisonResult = formattedDate.compareTo(formattedSevenDaysAgo)
+            if (comparisonResult < 0) {
+                Timber.d("currentDate는 otherDate보다 이전 날짜입니다.")
+                binding.ivLeftBtn.isEnabled=false
+                binding.ivRightBtn.isEnabled=true
+            }
             binding.tvMenuDate.text = formattedDate
             viewModel.getDiet(formattedDate2, "LUNCH")
+            binding.chip1.isChecked = true
+
         }
     }
 

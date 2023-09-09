@@ -1,4 +1,4 @@
-package com.lsakee.suwon_sulasang.di
+package com.lsakee.di
 
 import com.lsakee.data.remote.MenuDataSource
 import com.lsakee.data_remote.datasource.MenuDataSourceImpl

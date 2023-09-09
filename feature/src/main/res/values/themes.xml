@@ -9,4 +9,10 @@
     </style>
 
     <style name="Theme.Suwon_Sulasang" parent="Base.Theme.Suwon_Sulasang" />
+
+    <style name="Theme.Suwon_Sulasang.Splash">
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:windowBackground">@drawable/background_splash_screen</item>
+    </style>
 </resources>
