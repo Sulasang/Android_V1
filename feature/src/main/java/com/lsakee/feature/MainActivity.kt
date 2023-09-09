@@ -84,14 +84,12 @@ class MainActivity : BindingActivity<ActivityMainBinding>(R.layout.activity_main
                         timeMenuAdapter.submitList(companyMap["Little Kitchen"]?.second ?: listOf("오늘은 학식이 없습니다."))
 
                     }
-
                     // 두 번째 칩 버튼이 선택되어 있을 때 실행할 이벤트
                     if (binding.chip2.isChecked) {
                         menuAdapter.submitList(companyMap["Mom's Cook"]?.first ?: listOf("오늘은 학식이 없습니다."))
                         timeMenuAdapter.submitList(companyMap["Mom's Cook"]?.second ?: listOf("오늘은 학식이 없습니다."))
 
                     }
-
                     // 세 번째 칩 버튼이 선택되어 있을 때 실행할 이벤트
                     if (binding.chip3.isChecked) {
                         menuAdapter.submitList(companyMap["Chef Table"]?.first ?: listOf("오늘은 학식이 없습니다."))
@@ -142,7 +140,6 @@ class MainActivity : BindingActivity<ActivityMainBinding>(R.layout.activity_main
             }
             binding.tvMenuDate.text = formattedDate
             viewModel.getDiet(formattedDate2, "LUNCH")
-            binding.chip1.isChecked = true
 
         }
 
@@ -160,7 +157,6 @@ class MainActivity : BindingActivity<ActivityMainBinding>(R.layout.activity_main
             }
             binding.tvMenuDate.text = formattedDate
             viewModel.getDiet(formattedDate2, "LUNCH")
-            binding.chip1.isChecked = true
 
         }
     }
