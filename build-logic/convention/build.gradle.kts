@@ -37,5 +37,9 @@ gradlePlugin {
             id = "lsakee.plugin.feature"
             implementationClass = "FeatureConventionPlugin"
         }
+        register("FeatureCompose") {
+            id = "lsakee.feature.compose"
+            implementationClass = "FeatureComposeConventionPlugin"
+        }
     }
 }

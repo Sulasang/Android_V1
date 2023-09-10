@@ -11,6 +11,7 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
+        maven(url = "https://jitpack.io")
     }
 }
 
@@ -22,3 +23,4 @@ include(":data")
 include(":domain")
 include(":data-remote")
 include(":di")
+include(":feature-compose")
