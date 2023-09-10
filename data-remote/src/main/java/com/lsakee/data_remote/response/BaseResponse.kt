@@ -1,4 +1,4 @@
-package com.lsakee.data
+package com.lsakee.data_remote.response
 
 
 import kotlinx.serialization.SerialName
