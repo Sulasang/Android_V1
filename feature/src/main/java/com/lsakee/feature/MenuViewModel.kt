@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.lsakee.core_ui.view.UiState
 import com.lsakee.domain.model.Diet
 import com.lsakee.domain.usecase.GetDietUseCase
+import com.lsakee.feature.model.DietData
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -21,22 +22,11 @@ class MenuViewModel @Inject constructor(
     private val _diet = MutableStateFlow<UiState<Diet>>(UiState.Loading)
     val diet: StateFlow<UiState<Diet>> = _diet.asStateFlow()
 
-    data class DietData(
-        val diet1: Pair<List<String>, List<String>>,
-        val diet2: Pair<List<String>, List<String>>,
-        val diet3: Pair<List<String>, List<String>>
-    )
-
     private val _dietData = MutableStateFlow<UiState<DietData>>(UiState.Loading)
     val dietData: StateFlow<UiState<DietData>> = _dietData.asStateFlow()
-    fun getDiet(date:String, type:String) = viewModelScope.launch {
-        getDietUseCase(date,type).collect {
-            _diet.value=UiState.Success(it)
-            Timber.d("$it")
-        }
-    }
+
     private val companyMap = mutableMapOf<String, Pair<List<String>, List<String>>>()
-    fun getDietV2(date: String,type: String) = viewModelScope.launch {
+    fun getDiet(date: String,type: String) = viewModelScope.launch {
         getDietUseCase(date, type).collect{
             companyMap.clear()
             for (dietInfo in it.dateAndTypeDietInfo) {

@@ -50,7 +50,6 @@ class MainActivity : BindingActivity<ActivityMainBinding>(R.layout.activity_main
     }
 
     private fun collectTagListData() {
-
         viewModel.dietData.flowWithLifecycle(lifecycle).onEach {
             when (it) {
                 is UiState.Success -> {
@@ -84,9 +83,6 @@ class MainActivity : BindingActivity<ActivityMainBinding>(R.layout.activity_main
         val currentTime = Calendar.getInstance()
         val formattedDate = dateFormat.format(currentTime.time)
         val formattedDateISO = dateFormatISO.format(currentTime.time)
-        //초기 데이터 및 날짜 세팅
-        viewModel.getDiet(formattedDateISO, "LUNCH")
-        binding.tvMenuDate.text = formattedDate
         //7일전
         val sevenDaysAgo = Calendar.getInstance()
         sevenDaysAgo.add(Calendar.DAY_OF_MONTH, -7)
@@ -96,6 +92,10 @@ class MainActivity : BindingActivity<ActivityMainBinding>(R.layout.activity_main
 
         val formattedSevenDaysAgo = dateFormat.format(sevenDaysAgo.time)
         val formattedSevenDaysLater = dateFormat.format(sevenDaysLater.time)
+
+        //초기 데이터 및 날짜 세팅
+        viewModel.getDiet(formattedDateISO, "LUNCH")
+        binding.tvMenuDate.text = formattedDate
 
         binding.ivRightBtn.setOnClickListener {
             currentTime.add(Calendar.DAY_OF_MONTH, +1)
@@ -110,8 +110,6 @@ class MainActivity : BindingActivity<ActivityMainBinding>(R.layout.activity_main
             binding.ivLeftBtn.isEnabled=true
             binding.tvMenuDate.text = formattedDate
             viewModel.getDiet(formattedDate2, "LUNCH")
-            viewModel.getDietV2(formattedDate2, "LUNCH")
-
         }
 
         binding.ivLeftBtn.setOnClickListener {
