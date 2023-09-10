@@ -19,9 +19,6 @@ class MenuViewModel @Inject constructor(
     private val getDietUseCase: GetDietUseCase
     ) : ViewModel() {
 
-    private val _diet = MutableStateFlow<UiState<Diet>>(UiState.Loading)
-    val diet: StateFlow<UiState<Diet>> = _diet.asStateFlow()
-
     private val _dietData = MutableStateFlow<UiState<DietData>>(UiState.Loading)
     val dietData: StateFlow<UiState<DietData>> = _dietData.asStateFlow()
 
@@ -50,9 +47,9 @@ class MenuViewModel @Inject constructor(
                 }
             }
             _dietData.value = UiState.Success(DietData(
-                companyMap["Little Kitchen"] ?: Pair(emptyList(), emptyList()),
-                companyMap["Mom's Cook"] ?: Pair(emptyList(), emptyList()),
-                companyMap["Chef Table"] ?: Pair(emptyList(), emptyList())
+                companyMap["Little Kitchen"] ?: Pair(listOf("오늘은 학식이 없습니다."), listOf("오늘은 학식이 없습니다.")),
+                companyMap["Mom's Cook"] ?: Pair(listOf("오늘은 학식이 없습니다."), listOf("오늘은 학식이 없습니다.")),
+                companyMap["Chef Table"] ?: Pair(listOf("오늘은 학식이 없습니다."), listOf("오늘은 학식이 없습니다."))
             ))
         }
 
