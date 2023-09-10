@@ -22,14 +22,12 @@ class MainActivity : BindingActivity<ActivityMainBinding>(R.layout.activity_main
     private lateinit var menuAdapter: MenuAdapter
     private lateinit var timeMenuAdapter: MenuAdapter
     private val viewModel by viewModels<MenuViewModel>()
-    private lateinit var dateAndTypeDietInfo: List<DateAndTypeDietInfo>
     private val companyMap = mutableMapOf<String, Pair<List<String>, List<String>>>()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setCurrentDate()
         collectTagListData()
         initAdapter()
-
         binding.chipGroup.setOnCheckedChangeListener { group, checkedId ->
             when (checkedId) {
                 R.id.chip_1 -> handleChipClick("Little Kitchen")
@@ -53,31 +51,14 @@ class MainActivity : BindingActivity<ActivityMainBinding>(R.layout.activity_main
 
     private fun collectTagListData() {
 
-        viewModel.diet.flowWithLifecycle(lifecycle).onEach {
+        viewModel.dietData.flowWithLifecycle(lifecycle).onEach {
             when (it) {
                 is UiState.Success -> {
                     companyMap.clear()
-                    dateAndTypeDietInfo = it.data.dateAndTypeDietInfo
-                    for (dietInfo in it.data.dateAndTypeDietInfo) {
-                        val company = dietInfo.company
-                        if (company.isNotEmpty()) {
-                            if (companyMap.containsKey(company)) {
-                                val companyCommonMenu = companyMap[company]?.first?.toMutableList()
-                                val companyMainMenu = companyMap[company]?.second?.toMutableList()
-                                companyCommonMenu?.addAll(dietInfo.commonMenu)
-                                companyMainMenu?.addAll(dietInfo.mainMenu)
-                                companyMap[company] = Pair(
-                                    companyCommonMenu?.toList() ?: emptyList(),
-                                    companyMainMenu?.toList() ?: emptyList()
-                                )
-                            } else {
-                                val companyCommonMenu = dietInfo.commonMenu.toMutableList()
-                                val companyMainMenu = dietInfo.mainMenu.toMutableList()
-                                companyMap[company] =
-                                    Pair(companyCommonMenu.toList(), companyMainMenu.toList())
-                            }
-                        }
-                    }
+                    companyMap["Little Kitchen"] = it.data.diet1
+                    companyMap["Mom's Cook"] = it.data.diet2
+                    companyMap["Chef Table"] = it.data.diet3
+
                     val selectedChip = when {
                         binding.chip1.isChecked -> "Little Kitchen"
                         binding.chip2.isChecked -> "Mom's Cook"
@@ -94,7 +75,6 @@ class MainActivity : BindingActivity<ActivityMainBinding>(R.layout.activity_main
             }
         }.launchIn(lifecycleScope)
     }
-
 
     private fun setCurrentDate() {
         //날짜 정규식 이거 개드럽네 귀찮아 죽겄다
@@ -130,6 +110,7 @@ class MainActivity : BindingActivity<ActivityMainBinding>(R.layout.activity_main
             binding.ivLeftBtn.isEnabled=true
             binding.tvMenuDate.text = formattedDate
             viewModel.getDiet(formattedDate2, "LUNCH")
+            viewModel.getDietV2(formattedDate2, "LUNCH")
 
         }
 
