@@ -41,4 +41,15 @@ object Versions {
   
     const val GOOGLE_PLAY_VERSION = "20.6.0"
 
+    const val COMPOSE_WEBVIEW = "0.24.13-rc"
+
+    const val SPLASH_SCREEN_VERSION = "1.0.0-beta01"
+    const val COMPOSE = "1.2.0-rc01"
+    const val ACTIVITY_COMPOSE = "1.4.0"
+
+    const val NAV = "2.4.1"
+    const val ANI_NAV = "0.24.5-alpha"
+    const val LANDSCAPIST = "1.4.7"
+    const val HILT_NAV = "1.0.0"
+
 }

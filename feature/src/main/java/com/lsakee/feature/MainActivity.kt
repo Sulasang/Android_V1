@@ -28,6 +28,7 @@ class MainActivity : BindingActivity<ActivityMainBinding>(R.layout.activity_main
         setCurrentDate()
         collectTagListData()
         initAdapter()
+        val lastCheckedId = binding.chipGroup.checkedChipId
         binding.chipGroup.setOnCheckedChangeListener { group, checkedId ->
             when (checkedId) {
                 R.id.chip_1 -> handleChipClick("Little Kitchen")
