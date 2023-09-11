@@ -23,6 +23,7 @@ android {
 dependencies {
 
     implementation(project(":feature"))
+    implementation(project(":feature-compose"))
     implementation(project(":core-ui"))
     implementation(project(":domain"))
     implementation(project(":data"))

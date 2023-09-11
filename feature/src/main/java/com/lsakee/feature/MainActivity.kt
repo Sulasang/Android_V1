@@ -28,11 +28,16 @@ class MainActivity : BindingActivity<ActivityMainBinding>(R.layout.activity_main
         setCurrentDate()
         collectTagListData()
         initAdapter()
-        binding.chipGroup.setOnCheckedChangeListener { group, checkedId ->
-            when (checkedId) {
-                R.id.chip_1 -> handleChipClick("Little Kitchen")
-                R.id.chip_2 -> handleChipClick("Mom's Cook")
-                R.id.chip_3 -> handleChipClick("Chef Table")
+        
+        binding.chipGroup.setOnCheckedStateChangeListener { group, checkedIds ->
+            Timber.tag("Chips").d("$group , $checkedIds")
+            if (checkedIds.size==0){
+                return@setOnCheckedStateChangeListener
+            }
+            when (checkedIds[0]) {
+                    R.id.chip_1 -> handleChipClick("Little Kitchen")
+                    R.id.chip_2 -> handleChipClick("Mom's Cook")
+                    R.id.chip_3 -> handleChipClick("Chef Table")
             }
         }
     }
@@ -45,8 +50,8 @@ class MainActivity : BindingActivity<ActivityMainBinding>(R.layout.activity_main
     }
 
     private fun handleChipClick(companyName: String) {
-        menuAdapter.submitList(companyMap[companyName]?.first?: listOf("오늘은 학식이 없습니다."))
-        timeMenuAdapter.submitList(companyMap[companyName]?.second?: listOf("오늘은 학식이 없습니다."))
+        menuAdapter.submitList(companyMap[companyName]?.first ?: listOf("오늘은 학식이 없습니다."))
+        timeMenuAdapter.submitList(companyMap[companyName]?.second ?: listOf("오늘은 학식이 없습니다."))
     }
 
     private fun collectTagListData() {
@@ -66,7 +71,9 @@ class MainActivity : BindingActivity<ActivityMainBinding>(R.layout.activity_main
                     }
                     selectedChip?.let { chip ->
                         menuAdapter.submitList(companyMap[chip]?.first ?: listOf("오늘은 학식이 없습니다."))
-                        timeMenuAdapter.submitList(companyMap[chip]?.second ?: listOf("오늘은 학식이 없습니다."))
+                        timeMenuAdapter.submitList(
+                            companyMap[chip]?.second ?: listOf("오늘은 학식이 없습니다.")
+                        )
                     }
                 }
 
@@ -105,9 +112,9 @@ class MainActivity : BindingActivity<ActivityMainBinding>(R.layout.activity_main
             Timber.d("$formattedDate,$formattedSevenDaysLater")
             if (comparisonResult > 0) {
                 Timber.d("currentDate는 otherDate보다 이후 날짜입니다.")
-                binding.ivRightBtn.isEnabled=false
+                binding.ivRightBtn.isEnabled = false
             }
-            binding.ivLeftBtn.isEnabled=true
+            binding.ivLeftBtn.isEnabled = true
             binding.tvMenuDate.text = formattedDate
             viewModel.getDiet(formattedDate2, "LUNCH")
         }
@@ -119,9 +126,9 @@ class MainActivity : BindingActivity<ActivityMainBinding>(R.layout.activity_main
             val comparisonResult = formattedDate.compareTo(formattedSevenDaysAgo)
             if (comparisonResult < 0) {
                 Timber.d("currentDate는 otherDate보다 이전 날짜입니다.")
-                binding.ivLeftBtn.isEnabled=false
+                binding.ivLeftBtn.isEnabled = false
             }
-            binding.ivRightBtn.isEnabled=true
+            binding.ivRightBtn.isEnabled = true
             binding.tvMenuDate.text = formattedDate
             viewModel.getDiet(formattedDate2, "LUNCH")
         }
