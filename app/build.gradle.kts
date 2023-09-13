@@ -7,11 +7,11 @@ android {
     namespace = "com.lsakee.suwon_sulasang"
 
     defaultConfig {
-        applicationId = "com.lsakee.sulasang"
+        applicationId = "com.lsakee.suwon_sulasang"
         minSdk = 26
         targetSdk = 33
-        versionCode =1
-        versionName = "1.0"
+        versionCode =3
+        versionName = "1.0.1"
         testInstrumentationRunner ="androidx.test.runner.AndroidJUnitRunner"
     }
 

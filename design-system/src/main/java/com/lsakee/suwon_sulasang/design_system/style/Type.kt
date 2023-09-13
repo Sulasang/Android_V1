@@ -1,4 +1,4 @@
-package com.lsakee.design_system.style
+package com.lsakee.suwon_sulasang.design_system.style
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle
