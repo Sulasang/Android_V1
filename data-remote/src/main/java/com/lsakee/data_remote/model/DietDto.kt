@@ -1,8 +1,7 @@
-package com.lsakee.data.model
+package com.lsakee.data_remote.model
 
 
-import com.lsakee.domain.model.DateAndTypeDietInfo
-import com.lsakee.domain.model.Diet
+import com.lsakee.data.model.DietData
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -26,10 +25,10 @@ data class DateAndTypeDietInfoDto(
     val restaurantType: String
 )
 
-fun DietDto.toDietDomain() = Diet(
-    dateAndTypeDietInfo.map { it.toDateAndTypeDietInfoDomain() }
+fun DietDto.toDietData() = DietData(
+    dateAndTypeDietInfo.map { it.toDateAndTypeDietInfoData() }
 )
 
-fun DateAndTypeDietInfoDto.toDateAndTypeDietInfoDomain() = DateAndTypeDietInfo(
+fun DateAndTypeDietInfoDto.toDateAndTypeDietInfoData() = com.lsakee.data.model.DateAndTypeDietInfoData(
     commonMenu, company, mainMenu, mealType, restaurantType
 )

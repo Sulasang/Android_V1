@@ -13,6 +13,7 @@ android {
 dependencies {
 
     implementation(project(":domain"))
+    implementation(project(":feature-compose"))
     implementation(libs.kotlinx.serialization.json)
     implementation(project(mapOf("path" to ":core-ui")))
 

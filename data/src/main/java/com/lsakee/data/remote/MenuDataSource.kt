@@ -1,8 +1,8 @@
 package com.lsakee.data.remote
 
-import com.lsakee.data.BaseResponse
-import com.lsakee.data.model.DietDto
+import com.lsakee.data.model.DietData
+import kotlinx.coroutines.flow.Flow
 
 interface MenuDataSource {
-    suspend fun getDiet(date: String, type: String): BaseResponse<DietDto>
+    suspend fun getDiet(date: String, type: String): Flow<DietData>
 }

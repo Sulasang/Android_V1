@@ -5,20 +5,18 @@ import com.lsakee.data.remote.MenuDataSource
 import com.lsakee.domain.model.Diet
 import com.lsakee.domain.repository.MenuRepository
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flatMapConcat
 import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 
 class MenuRepositoryImpl @Inject constructor(
     private val dataSource: MenuDataSource,
 ) : MenuRepository {
-
-    override suspend fun getDiet(date:String,type:String): Flow<Diet> {
-        return flow {
-            val result = kotlin.runCatching {
-                dataSource.getDiet(date, type).result?.toDietDomain()
+    override suspend fun getDiet(date: String, type: String): Flow<Diet> {
+        return dataSource.getDiet(date, type).flatMapConcat {
+            flow {
+                emit(it.toDietDomain())
             }
-            result.getOrDefault(Diet(emptyList()))?.let { emit(it) }
         }
     }
-
 }

@@ -28,11 +28,16 @@ class MainActivity : BindingActivity<ActivityMainBinding>(R.layout.activity_main
         setCurrentDate()
         collectTagListData()
         initAdapter()
-        binding.chipGroup.setOnCheckedChangeListener { group, checkedId ->
-            when (checkedId) {
-                R.id.chip_1 -> handleChipClick("Little Kitchen")
-                R.id.chip_2 -> handleChipClick("Mom's Cook")
-                R.id.chip_3 -> handleChipClick("Chef Table")
+
+        binding.chipGroup.setOnCheckedStateChangeListener { group, checkedIds ->
+            Timber.tag("Chips").d("$group , $checkedIds")
+            if (checkedIds.size==0){
+                return@setOnCheckedStateChangeListener
+            }
+            when (checkedIds[0]) {
+                    R.id.chip_1 -> handleChipClick("Little Kitchen")
+                    R.id.chip_2 -> handleChipClick("Mom's Cook")
+                    R.id.chip_3 -> handleChipClick("Chef Table")
             }
         }
     }

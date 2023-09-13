@@ -3,6 +3,7 @@ package com.lsakee.feature
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.lsakee.core_ui.view.UiState
+import com.lsakee.domain.collectOutcome
 import com.lsakee.domain.model.Diet
 import com.lsakee.domain.usecase.GetDietUseCase
 import com.lsakee.feature.model.DietData
