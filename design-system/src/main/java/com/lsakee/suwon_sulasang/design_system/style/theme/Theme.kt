@@ -1,4 +1,4 @@
-package com.lsakee.suwon_sulasang.design_system.style
+package com.lsakee.suwon_sulasang.design_system.style.theme
 
 import android.app.Activity
 import android.os.Build
@@ -14,6 +14,7 @@ import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalView
 import androidx.core.view.WindowCompat
+import com.lsakee.suwon_sulasang.design_system.style.color.SulasangColor
 
 private val DarkColorScheme = darkColorScheme(
     primary = SulasangColor.usw_yellow,
@@ -63,7 +64,6 @@ fun Suwon_SulasangTheme(
 
     MaterialTheme(
         colorScheme = colorScheme,
-        typography = Typography,
         content = content
     )
 }

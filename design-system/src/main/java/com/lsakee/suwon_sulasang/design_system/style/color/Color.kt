@@ -1,4 +1,4 @@
-package com.lsakee.suwon_sulasang.design_system.style
+package com.lsakee.suwon_sulasang.design_system.style.color
 
 import androidx.compose.ui.graphics.Color
 object SulasangColor{
