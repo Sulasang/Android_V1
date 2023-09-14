@@ -9,7 +9,8 @@ import timber.log.Timber
 class SplashActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        startActivity(Intent(this, com.lsakee.feature.MainActivity::class.java))
+//        startActivity(Intent(this, com.lsakee.feature.MainActivity::class.java))
+        startActivity(Intent(this, MainActivity::class.java))
         finish()
     }
 }
