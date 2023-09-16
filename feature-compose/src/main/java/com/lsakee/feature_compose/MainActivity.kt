@@ -26,6 +26,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.lsakee.suwon_sulasang.design_system.button.HomeChip
 import com.lsakee.suwon_sulasang.design_system.style.icon.SulasangIcon
 import com.lsakee.suwon_sulasang.design_system.style.theme.Suwon_SulasangTheme
 import com.lsakee.suwon_sulasang.design_system.style.typography.SubHead
@@ -89,6 +90,7 @@ fun HomeScreen(name: String, modifier: Modifier = Modifier) {
                         .clickable { /* Handle right arrow click */ }
                 )
                 Spacer(modifier = Modifier.width(16.dp))
+                HomeChip(name = "test", isSelected = false)
             }
         }
 
