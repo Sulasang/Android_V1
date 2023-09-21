@@ -1,4 +1,4 @@
-package com.lsakee.suwon_sulasang.design_system.style
+package com.lsakee.suwon_sulasang.design_system.style.theme
 
 import android.app.Activity
 import android.os.Build
@@ -14,18 +14,18 @@ import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalView
 import androidx.core.view.WindowCompat
+import com.lsakee.suwon_sulasang.design_system.style.color.SulasangColor
 
 private val DarkColorScheme = darkColorScheme(
-    primary = Purple80,
-    secondary = PurpleGrey80,
-    tertiary = Pink80
+    primary = SulasangColor.usw_yellow,
+    secondary = SulasangColor.usw_white_yellow,
+    tertiary = SulasangColor.usw_navy
 )
 
 private val LightColorScheme = lightColorScheme(
-    primary = Purple40,
-    secondary = PurpleGrey40,
-    tertiary = Pink40
-
+    primary = SulasangColor.usw_yellow,
+    secondary = SulasangColor.usw_white_yellow,
+    tertiary = SulasangColor.usw_navy
     /* Other default colors to override
     background = Color(0xFFFFFBFE),
     surface = Color(0xFFFFFBFE),
@@ -64,7 +64,6 @@ fun Suwon_SulasangTheme(
 
     MaterialTheme(
         colorScheme = colorScheme,
-        typography = Typography,
         content = content
     )
 }
