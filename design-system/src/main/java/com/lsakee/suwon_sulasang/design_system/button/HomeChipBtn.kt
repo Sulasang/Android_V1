@@ -1,5 +1,7 @@
 package com.lsakee.suwon_sulasang.design_system.button
 
+import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Row
@@ -8,6 +10,9 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Clear
+import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -45,7 +50,47 @@ fun HomeChip(
 
     }
 }
+@Composable
+private fun Chip(
+    text: String,
+    selected: Boolean,
+    modifier: Modifier = Modifier,
+    onChipClicked: () -> Unit,
+) {
+    Surface(
+        color = when {
+            selected -> SulasangColor.usw_yellow
+            else -> SulasangColor.white
+        },
+        contentColor = SulasangColor.g_100,
+        shape = RoundedCornerShape(16.dp),
+        border = BorderStroke(
+            width = 1.dp,
+            color = when {
+                selected -> SulasangColor.usw_yellow
+                else -> SulasangColor.white
+            }
+        ),
+        modifier = modifier
+    ) {
+        Row(modifier = Modifier) {
+            BodyB2(
+                text = text,
+                modifier = Modifier
+                    .padding(8.dp)
+                    .clickable { onChipClicked() }
+            )
 
+            Image(
+                imageVector = Icons.Default.Clear,
+                contentDescription = null,
+                modifier = Modifier
+                    .padding(8.dp)
+                    .size(20.dp)
+            )
+        }
+    }
+}
 @Preview(showBackground = true)
 @Composable
 fun HomyChipPreview() {
